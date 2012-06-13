@@ -1,0 +1,58 @@
+  <html>
+
+    <head>
+
+      <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+
+      <!-- Wrapping the Recaptcha create method in a javascript function -->
+      <script type="text/javascript">
+
+         function showRecaptcha(element, lang) {
+           Recaptcha.create("6LfrirwSAAAAACoBnrC73SxtkZ1zpXVCD0DXMxb4", element, {
+             theme: "clean",
+             lang : lang,
+             callback: Recaptcha.focus_response_field});
+
+         }
+         showRecaptcha('recaptcha_div');
+
+         function populateResponse() {
+            document.getElementById("challenge").value = document.getElementById("recaptcha_challenge_field").value;
+            document.getElementById("response").value = document.getElementById("recaptcha_response_field").value;
+         }
+
+      </script>
+
+    </head>
+
+    <body>
+
+      <input type="button" value="Show reCAPTCHA" onclick="showRecaptcha('recaptcha_div', document.getElementById('lang').value);"/> in the following language 
+      <select id='lang'>
+         <option>en</option>
+         <option>nl</option>
+         <option>fr</option>
+         <option>de</option>
+         <option>pt</option>
+         <option>ru</option>
+         <option>es</option>
+         <option>tr</option>
+         <option>hu</option>
+      </select>
+
+      <div id="recaptcha_div"></div>
+      <form method="post" action="http://www.google.com/recaptcha/api/verify">
+        <input type="submit" onClick="populateResponse();" value="solove"/>
+        <input name="privatekey" value="6LfrirwSAAAAALVIEPbQIvBiJ32A_Io6bdTAmlYA"/>
+        <input name="remoteip" value="localhost"/>
+        <input name="challenge" id="challenge" value=""/>
+        <input name="response" id="response" value=""/>
+      </form>
+
+  
+      <script type="text/javascript">
+         showRecaptcha('recaptcha_div', document.getElementById('lang').value);
+      </script>
+    </body>
+
+  </html>
